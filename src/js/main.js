@@ -63,4 +63,3 @@ class NoMobile {
 
 }
 
-const obj = new NoMobile("Swagger", "../test/corgi.jpg");

@@ -22,5 +22,5 @@ const obj = new NoMobile();
 The `NoMobile` class takes some optional parameters including `message` and `imgPath`.
 
 ```javascript
-const obj = new NoMobile();
+const obj = new NoMobile("Unsupported On Mobile","../path/image.jpg");
 ```
