@@ -1,65 +1,71 @@
 
+// 
+export default class GradeCalculator {
+
+    constructor(values) {
+
+        this.values = values;
+
+        this.weights = this.values.map((item) => {
+            return item.weight
+        });
+
+        this.grades = this.values.map((item) => {
+            return item.grade;
+        });
+
+        this.total_weight = this.weights.reduce(function (previous, current) {
+            return previous + current;
+        }, 0);
+
+        this.grade_parts = this.hello();
 
 
-class NoMobile {
-    constructor(message, imgPath) {
-        this.message = message ? message : "Try The Desktop Version";
-        this.imgPath = imgPath ? imgPath : '';
-
-        this.render = this.checkMobile() ? this.createScreen() : undefined;
-    }
+        this.final_grade = this.grade_parts.reduce(function (previous, current) {
+            return previous + current;
+        }, 0);
 
 
-    checkMobile() {
-        if (navigator.userAgent.match(/Android/i)
-            || navigator.userAgent.match(/webOS/i)
-            || navigator.userAgent.match(/iPhone/i)
-            || navigator.userAgent.match(/iPad/i)
-            || navigator.userAgent.match(/iPod/i)
-            || navigator.userAgent.match(/BlackBerry/i)
-            || navigator.userAgent.match(/Windows Phone/i)) {
-            return true;
-        } else {
-            return false;
+
+
+
+        // Auto Run
+        this.weight_check = this.checkWeight();
+
+    };
+
+
+
+
+
+
+    // Check if all the weight add up to 100
+    checkWeight() {
+        if (this.total_weight > 100 || this.total_weight < 100 || this.total_weight < 0) {
+            console.error("Invalid Total Grade weight:", this.total_weight)
         }
+
+    };
+
+
+
+    hello() {
+        let temp = []
+        for (let i = 0; i < this.values.length; i++) {
+            temp.push((this.weights[i] / 100) * this.grades[i])
+        }
+        return temp;
+    }
+
+    finalGrade() {
+        return parseFloat(this.final_grade.toFixed(2));
     }
 
 
 
-    createScreen(params) {
-        let pageNode = document.createElement('div');
-        let imgNode = document.createElement('img');;
-        let textNode = document.createElement('p');
+};
 
 
-        pageNode.style.display = "flex";
-        pageNode.style.flexDirection = "column"
-        pageNode.style.justifyContent = "center";
-        pageNode.style.alignItems = "center"
-        pageNode.style.position = "absolute";
-        pageNode.style.height = "100vh";
-        pageNode.style.width = "100%";
-        pageNode.style.margin = "0px";
-        pageNode.style.top = "0";
-        pageNode.style.left = "0";
-        pageNode.style.zIndex = "2";
-        pageNode.style.backgroundColor = "#fafafa";
-
-        imgNode.src = this.imgPath;
-        imgNode.style.width = "110px";
-
-        textNode.innerHTML = this.message;
-        textNode.style.color = "#5b5b5b";
-        textNode.style.fontFamily = "arial";
-        textNode.style.fontWeight = "bold";
-
-        pageNode.append(imgNode);
-        pageNode.append(textNode);
-        document.body.append(pageNode);
-
-        console.log('working');
-    }
 
 
-}
 

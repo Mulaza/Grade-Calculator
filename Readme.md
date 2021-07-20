@@ -1,26 +1,39 @@
 
-# No Mobile
+# Grade Calculator
 
-A single javascript object that prevents the user from interacting on a page on mobile devices. This may come in handy when the user interface or navigation of a website isn't 'touch friendly'.
-
-
+A single javascript object that lets you quickly calculate your final grade from various subject grades and weights.
 
 ## How to use
 
 Link the main script to your HTML document.
-
 ```html
 <script defer src="./src/js/main.js"></script>
 ```
-
-Create an instance of the `NoMobile` class.
+To use the object you need to pass in the desired grades and weights in dictionaries.
+The weight values have to add up to `100` exactly.
 ```javascript
-const obj = new NoMobile();
+const values = [
+    {   
+        // Homework
+        weight: 20,
+        grade: 80
+    },
+    {
+        // Midterm
+        weight: 30,
+        grade: 72
+    },
+    {
+        // Final Exam
+        weight: 50,
+        grade: 60
+    }
+
+];
 ```
 
-## API
-The `NoMobile` class takes some optional parameters including `message` and `imgPath`.
-
+Create an instance of the `GradeCalculator` class and pass in an object with `weight` and `grade` properties.
 ```javascript
-const obj = new NoMobile("Unsupported On Mobile","../path/image.jpg");
+const myGrade = new GradeCalculator(values); 
+obj.finalGrade(); // 67.6
 ```
